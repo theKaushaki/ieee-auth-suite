@@ -1,0 +1,29 @@
+# Database files
+certificates.db
+*.db
+*.sqlite3
+*.db-journal
+
+# Generated output
+/output_certificates/
+
+# Python specific
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+.venv/
+venv/
+ENV/
+env/
+myenv/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# IDE configuration
+.vscode/
+.idea/
