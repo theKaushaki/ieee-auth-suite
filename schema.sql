@@ -6,6 +6,7 @@ CREATE TABLE certificates (
     certificate_id TEXT NOT NULL UNIQUE,
     author_name TEXT NOT NULL,
     article_name TEXT NOT NULL UNIQUE,
+    pdf_drive_link TEXT,
     generation_timestamp TEXT NOT NULL,
     pdf_path TEXT
 );

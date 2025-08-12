@@ -1,0 +1,12 @@
+[build]
+  command = "pip install -r requirements.txt && python main.py"
+  functions = "functions/"
+
+[functions]
+  included_files = ["templates/**", "app.py", "database.py", "schema.sql"]
+
+[[redirects]]
+  # This rule directs all incoming traffic to the FLask
+  from = "/*"
+  to = "/.netlify/functions/api"
+  status = 200

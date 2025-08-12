@@ -60,18 +60,20 @@ def process_csv(file_path):
     for index, row in df.iterrows():
         author = row['author_name']
         article = row['article_name']
+        pdf_link = row['pdf_drive_link']
 
         if database.article_exists(article):
             print(f"Skipping '{article}': Certificate already exists.")
             continue
 
         # Generate me, baby, sorry for the pun, unique internal certificate ID
+        
         unique_string = f"{author.strip().lower()}-{article.strip().lower()}"
         internal_cert_id = hashlib.sha256(unique_string.encode()).hexdigest()
 
         # Add the certificate record
         timestamp = datetime.utcnow().isoformat()
-        public_id = database.add_certificate(internal_cert_id, author, article, timestamp, "")
+        public_id = database.add_certificate(internal_cert_id, author, article, pdf_link, timestamp, "")
         
         # Check me out, lol, cop song flashback
         if not public_id:

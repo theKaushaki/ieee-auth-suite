@@ -1,5 +1,5 @@
-author_name,article_name
-"Dr. Ada Lovelace","The Analytical Engine"
-"Grace Hopper","Compilers and High-Level Languages"
-"Dr. Alan Turing","On Computable Numbers"
-"Dr. Ada Lovelace","The Analytical Engine"
+author_name,article_name,pdf_drive_link
+"Dr. Ada Lovelace","The Analytical Engine","https://google.com/analytical_engine.pdf"
+"Grace Hopper","Compilers and High-Level Languages","https://google.com/compilers.pdf"
+"Dr. Alan Turing","On Computable Numbers","https://google.com/computable_numbers.pdf"
+"Dr. Ada Lovelace","The Analytical Engine","https://.com/analytical_engine.pdf"

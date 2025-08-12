@@ -18,6 +18,20 @@ def init_db(schema_file='schema.sql'):
         print(f"Error initializing database: {e}")
 
 def get_db_connection():
+    # Check for environment variables set in Netlify
+    url = os.environ.get("TURSO_DATABASE_URL")
+    token = os.environ.get("TURSO_AUTH_TOKEN")
+
+    if url and token:
+        # Connect to the remote Turso database
+        return libsql_client.create_client_sync(url=url, auth_token=token)
+    else:
+        # Fallback to local file for local development
+        conn = sqlite3.connect(DATABASE_FILE)
+        conn.row_factory = sqlite3.Row
+        return conn
+
+def get_db_connection():
     conn = sqlite3.connect(DATABASE_FILE)
     conn.row_factory = sqlite3.Row
     return conn
@@ -32,7 +46,7 @@ def article_exists(article_name):
 
 # 
 
-def add_certificate(cert_id, author, article, timestamp, pdf_path):
+def add_certificate(cert_id, author, article, pdf_link, timestamp, pdf_path):
     """
     Adds a new certificate record and generates a unique public_id, exist kareni jadi
     """
@@ -42,8 +56,8 @@ def add_certificate(cert_id, author, article, timestamp, pdf_path):
         with conn:
             cursor = conn.cursor()
             cursor.execute(
-                "INSERT INTO certificates (certificate_id, author_name, article_name, generation_timestamp, pdf_path) VALUES (?, ?, ?, ?, ?)",
-                (cert_id, author, article, timestamp, pdf_path)
+                "INSERT INTO certificates (certificate_id, author_name, article_name, pdf_drive_link, generation_timestamp, pdf_path) VALUES (?, ?, ?, ?, ?, ?)",
+                (cert_id, author, article, pdf_link, timestamp, pdf_path)
             )
 
             last_id = cursor.lastrowid

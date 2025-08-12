@@ -3,6 +3,13 @@ import database
 
 app = Flask(__name__)
 
+@app.route('/')
+def home():
+    conn = database.get_db_connection()
+    articles = conn.execute('SELECT * FROM certificates ORDER BY author_name').fetchall()
+    conn.close()
+    return render_template('home.html', articles=articles)
+
 @app.route('/validate/<public_id>')
 def validate_certificate(public_id):
     conn = database.get_db_connection()
